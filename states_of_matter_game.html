@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biplab Bothra Institute – States of Matter</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ── Global Reset & Fonts ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600;700&display=swap');
+
+  :root {
+    --gold:    #FFD700;
+    --gold-lt: #FFE86B;
+    --navy:    #0A0A2E;
+    --indigo:  #1A1A5E;
+    --purple:  #2D1B69;
+    --cyan:    #00E5FF;
+    --hot:     #FF4500;
+    --ice:     #A8DAFF;
+    --steam:   #C8E6FF;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--navy);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Screen Switcher ── */
+  .screen { display: none; }
+  .screen.active { display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* ── Header Brand ── */
+  .brand-header {
+    background: linear-gradient(135deg, #0D0D3A 0%, #1E0A4E 100%);
+    border-bottom: 3px solid var(--gold);
+    text-align: center;
+    padding: 16px 12px 12px;
+  }
+  .brand-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.1rem, 4vw, 2rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    text-shadow: none;
+  }
+  .brand-sub {
+    font-size: 0.75rem;
+    color: #aab;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ── Registration ── */
+  #screen-register {
+    justify-content: flex-start;
+  }
+  .reg-card {
+    background: linear-gradient(145deg, #12124A, #1E0A4E);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 32px 28px;
+    max-width: 480px;
+    width: 90%;
+    margin: 32px auto;
+    box-shadow: 0 0 40px rgba(255,215,0,0.15);
+  }
+  .reg-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--gold);
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .reg-card p { color:#aab; font-size:0.85rem; text-align:center; margin-bottom:24px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display:block; font-size:0.8rem; color:var(--gold-lt); margin-bottom:6px; font-weight:600; letter-spacing:1px; }
+  .form-group input, .form-group select {
+    width:100%; padding:11px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,215,0,0.4);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: #1A1A5E; }
+
+  .btn-gold {
+    width:100%; padding:13px;
+    background: linear-gradient(135deg, #B8860B, var(--gold), #B8860B);
+    color: #0A0A2E;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(255,215,0,0.35);
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,215,0,0.5); }
+  .btn-gold:active { transform: translateY(0); }
+
+  /* ── Main Menu ── */
+  #screen-menu { justify-content: center; align-items: center; }
+  .menu-body { text-align:center; padding:32px 20px; width:100%; max-width:700px; margin:0 auto; }
+  .menu-greeting { color: var(--gold-lt); font-size:1rem; margin-bottom:8px; }
+  .menu-title { font-family:'Orbitron',sans-serif; font-size:clamp(1.1rem,4vw,1.9rem); color:var(--gold); margin-bottom:32px; }
+  .menu-cards { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+  .menu-card {
+    flex:1 1 260px; max-width:320px;
+    background: linear-gradient(145deg,#12124A,#1E0A4E);
+    border:2px solid var(--gold);
+    border-radius:20px;
+    padding:32px 24px;
+    cursor:pointer;
+    transition:transform 0.2s, box-shadow 0.2s;
+    box-shadow:0 0 20px rgba(255,215,0,0.1);
+  }
+  .menu-card:hover { transform:translateY(-6px); box-shadow:0 0 40px rgba(255,215,0,0.3); }
+  .menu-card .icon { font-size:3rem; margin-bottom:14px; }
+  .menu-card h3 { font-family:'Orbitron',sans-serif; color:var(--gold); font-size:1rem; margin-bottom:8px; }
+  .menu-card p { color:#aab; font-size:0.82rem; line-height:1.5; }
+
+  /* ── Lab ── */
+  #screen-lab { flex-direction:column; }
+  .lab-nav {
+    display:flex; gap:6px; flex-wrap:wrap;
+    padding:12px 16px;
+    background:rgba(0,0,0,0.3);
+    border-bottom:2px solid rgba(255,215,0,0.25);
+    justify-content:center;
+  }
+  .lab-nav button {
+    padding:7px 14px;
+    background:rgba(255,215,0,0.08);
+    border:1.5px solid rgba(255,215,0,0.35);
+    border-radius:8px;
+    color:#ccc;
+    font-size:0.75rem;
+    cursor:pointer;
+    transition:all 0.2s;
+    white-space:nowrap;
+  }
+  .lab-nav button.active, .lab-nav button:hover { background:var(--gold); color:var(--navy); font-weight:700; border-color:var(--gold); }
+
+  .lab-content { flex:1; display:flex; flex-direction:column; align-items:center; padding:20px 16px; gap:16px; }
+
+  /* Shared canvas wrapper */
+  .canvas-wrap {
+    width:100%; max-width:640px;
+    background:linear-gradient(180deg,#080824,#0F0F3A);
+    border:2px solid rgba(255,215,0,0.3);
+    border-radius:16px;
+    overflow:hidden;
+    position:relative;
+  }
+  canvas { display:block; width:100%; }
+
+  /* Controls */
+  .lab-controls {
+    width:100%; max-width:640px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,215,0,0.2);
+    border-radius:12px;
+    padding:16px 20px;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .ctrl-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .ctrl-row label { font-size:0.82rem; color:var(--gold-lt); min-width:80px; }
+  input[type="range"] {
+    flex:1; accent-color: var(--gold);
+    min-width:120px;
+  }
+  .state-badge {
+    padding:5px 14px;
+    border-radius:20px;
+    font-size:0.8rem;
+    font-weight:700;
+    letter-spacing:1px;
+  }
+  .badge-solid  { background:#1A3A6A; border:1.5px solid var(--ice);   color:var(--ice); }
+  .badge-liquid { background:#0A3A3A; border:1.5px solid #00E5FF;       color:#00E5FF; }
+  .badge-gas    { background:#3A1A0A; border:1.5px solid #FF8C00;       color:#FF8C00; }
+
+  .info-box {
+    background:rgba(255,215,0,0.06);
+    border-left:3px solid var(--gold);
+    border-radius:0 8px 8px 0;
+    padding:10px 14px;
+    font-size:0.82rem;
+    color:#ccc;
+    line-height:1.5;
+    width:100%; max-width:640px;
+  }
+  .info-box strong { color:var(--gold-lt); }
+
+  .lab-btn {
+    padding:10px 24px;
+    background:linear-gradient(135deg,#B8860B,var(--gold));
+    color:var(--navy);
+    font-weight:700;
+    font-size:0.85rem;
+    border:none; border-radius:10px;
+    cursor:pointer;
+    transition:transform 0.15s;
+    letter-spacing:1px;
+  }
+  .lab-btn:hover { transform:scale(1.04); }
+  .lab-btn:disabled { opacity:0.4; cursor:default; transform:none; }
+
+  .back-btn {
+    padding:8px 20px;
+    background:transparent;
+    border:1.5px solid rgba(255,215,0,0.4);
+    border-radius:8px;
+    color:var(--gold-lt);
+    font-size:0.8rem;
+    cursor:pointer;
+    transition:all 0.2s;
+    align-self:flex-start;
+  }
+  .back-btn:hover { background:rgba(255,215,0,0.1); }
+
+  /* Thermometer */
+  .thermo-wrap { display:flex; align-items:flex-end; gap:16px; }
+  .thermo {
+    width:36px; height:200px;
+    background:rgba(255,255,255,0.08);
+    border:2px solid rgba(255,255,255,0.2);
+    border-radius:18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .thermo-fill {
+    position:absolute; bottom:0; left:0; right:0;
+    border-radius:0 0 18px 18px;
+    transition:height 0.2s, background 0.4s;
+    background:#0af;
+  }
+  .thermo-label {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    font-size:0.6rem; color:#fff; font-weight:700; white-space:nowrap;
+    pointer-events:none;
+  }
+
+  /* Graph canvas */
+  #graphCanvas { width:100%; }
+
+  /* ── KBC Quiz ── */
+  #screen-quiz {
+    background: radial-gradient(ellipse at center top, #1A0A40 0%, #050514 100%);
+  }
+  .kbc-wrap { max-width:700px; width:100%; margin:0 auto; padding:16px; flex:1; display:flex; flex-direction:column; }
+
+  .kbc-top-bar {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:8px 0; margin-bottom:12px;
+  }
+  .kbc-score-box {
+    background:rgba(255,215,0,0.1);
+    border:1.5px solid var(--gold);
+    border-radius:10px;
+    padding:6px 16px;
+    font-family:'Orbitron',sans-serif;
+    font-size:0.85rem;
+    color:var(--gold);
+  }
+  .kbc-q-counter { font-size:0.8rem; color:#aab; }
+  .kbc-progress {
+    width:100%; height:4px;
+    background:rgba(255,255,255,0.1);
+    border-radius:2px;
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+  .kbc-progress-fill {
+    height:100%;
+    background: linear-gradient(90deg, var(--gold), #FF8C00);
+    border-radius:2px;
+    transition: width 0.4s;
+  }
+
+  .kbc-question-box {
+    background: linear-gradient(145deg, rgba(26,10,80,0.9), rgba(10,10,46,0.9));
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+    min-height: 110px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255,215,0,0.1), inset 0 0 30px rgba(0,0,0,0.3);
+  }
+  .kbc-question-box::before, .kbc-question-box::after {
+    content:''; position:absolute; top:-2px; left:-2px; right:-2px; bottom:-2px;
+    border-radius:17px; pointer-events:none;
+  }
+  .kbc-question-box::before { border: 2px solid rgba(255,215,0,0.3); }
+  .kbc-q-num {
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:var(--navy);
+    font-family:'Orbitron',sans-serif; font-size:0.7rem; font-weight:700;
+    padding:3px 14px; border-radius:12px; letter-spacing:1px;
+  }
+  .kbc-question-text {
+    font-size: clamp(0.9rem,2.5vw,1.1rem);
+    line-height: 1.5;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* KBC Options grid */
+  .kbc-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kbc-option {
+    background: linear-gradient(135deg, rgba(26,26,94,0.8), rgba(45,27,105,0.8));
+    border: 2px solid rgba(255,215,0,0.45);
+    border-radius: 40px;
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.2s;
+    font-size: clamp(0.78rem, 2vw, 0.9rem);
+    color: #dde;
+    position: relative;
+    overflow: hidden;
+  }
+  .kbc-option:hover:not(.locked) {
+    border-color: var(--gold);
+    background: linear-gradient(135deg,rgba(255,215,0,0.15),rgba(45,27,105,0.9));
+    color: #fff;
+    transform: scale(1.02);
+  }
+  .kbc-option .opt-letter {
+    width: 28px; height: 28px; min-width: 28px;
+    background: rgba(255,215,0,0.15);
+    border: 1.5px solid rgba(255,215,0,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron',sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    color: var(--gold);
+  }
+  .kbc-option.correct {
+    background: linear-gradient(135deg,#0A3A0A,#145214) !important;
+    border-color: #00FF88 !important;
+    color: #00FF88 !important;
+    animation: pulse-correct 0.5s ease;
+  }
+  .kbc-option.correct .opt-letter { background:rgba(0,255,136,0.2); border-color:#00FF88; color:#00FF88; }
+  .kbc-option.wrong {
+    background: linear-gradient(135deg,#3A0A0A,#521414) !important;
+    border-color: #FF4444 !important;
+    color: #FF6666 !important;
+    animation: pulse-wrong 0.5s ease;
+  }
+  .kbc-option.wrong .opt-letter { background:rgba(255,68,68,0.2); border-color:#FF4444; color:#FF4444; }
+  .kbc-option.locked { cursor:default; pointer-events:none; }
+
+  @keyframes pulse-correct { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
+  @keyframes pulse-wrong   { 0%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} 100%{transform:translateX(0)} }
+
+  .kbc-lifeline-bar { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
+
+  /* ── Final Score Screen ── */
+  #screen-result { justify-content:center; align-items:center; }
+  .result-card {
+    background: linear-gradient(145deg,#12124A,#1E0A4E);
+    border: 3px solid var(--gold);
+    border-radius: 24px;
+    padding: 40px 32px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(255,215,0,0.2);
+    margin: 32px auto;
+  }
+  .trophy { font-size:5rem; margin-bottom:16px; animation: bounce 1s infinite alternate; }
+  @keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-12px)} }
+  .result-name { font-family:'Orbitron',sans-serif; color:var(--gold); font-size:1.3rem; margin-bottom:8px; }
+  .result-score-big {
+    font-family:'Orbitron',sans-serif;
+    font-size:3.5rem; font-weight:900;
+    background:linear-gradient(90deg,var(--gold),#FF8C00,var(--gold));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin:12px 0;
+  }
+  .result-msg { color:#aab; font-size:0.9rem; line-height:1.6; margin-bottom:24px; }
+  .result-stars { font-size:2rem; margin-bottom:16px; letter-spacing:4px; }
+  .share-btn {
+    width:100%; padding:13px;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    color:#fff;
+    font-weight:700; font-size:0.95rem;
+    border:none; border-radius:12px;
+    cursor:pointer;
+    letter-spacing:1px;
+    margin-bottom:12px;
+    transition:transform 0.15s;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .share-btn:hover { transform:scale(1.03); }
+  .copy-tip { font-size:0.72rem; color:#667; margin-bottom:20px; }
+
+  /* Sparkle overlay for result */
+  .sparkles { pointer-events:none; position:fixed; top:0;left:0;right:0;bottom:0; overflow:hidden; z-index:0; }
+  .sparkle {
+    position:absolute; width:6px; height:6px;
+    background:var(--gold); border-radius:50%;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform:translateY(-20px) rotate(0deg); opacity:1; }
+    100% { transform:translateY(100vh) rotate(360deg); opacity:0; }
+  }
+
+  /* ── Sublimation atom grid ── */
+  .sublimation-info { text-align:center; color:var(--cyan); font-size:0.85rem; }
+
+  /* Responsive fixes */
+  @media(max-width:500px){
+    .kbc-options { grid-template-columns:1fr; }
+    .reg-card { padding:24px 18px; }
+    .menu-card { max-width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 1: REGISTRATION
+═══════════════════════════════════════════════ -->
+<div id="screen-register" class="screen active">
+  <div class="brand-header">
+    <div class="brand-title">⚗️ Biplab Bothra Institute</div>
+    <div class="brand-sub">Science Interactive Lab</div>
+  </div>
+
+  <div class="reg-card">
+    <h2>Welcome, Scholar! 🎓</h2>
+    <p>Enter your details to begin the States of Matter journey.</p>
+
+    <div class="form-group">
+      <label>FULL NAME</label>
+      <input type="text" id="reg-name" placeholder="e.g. Aarav Sharma" autocomplete="name">
+    </div>
+    <div class="form-group">
+      <label>EMAIL ADDRESS</label>
+      <input type="email" id="reg-email" placeholder="e.g. aarav@gmail.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>YOUR CLASS</label>
+      <select id="reg-class">
+        <option value="">— Select Class —</option>
+        <option value="Class 6">Class 6</option>
+        <option value="Class 7">Class 7</option>
+        <option value="Class 8">Class 8</option>
+      </select>
+    </div>
+    <div id="reg-error" style="color:#FF6666;font-size:0.8rem;margin-bottom:10px;display:none;"></div>
+    <button class="btn-gold" onclick="startLearning()">🚀 START LEARNING</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 2: MAIN MENU
+═══════════════════════════════════════════════ -->
+<div id="screen-menu" class="screen">
+  <div class="brand-header">
+    <div class="brand-title">⚗️ Biplab Bothra Institute</div>
+    <div class="brand-sub">States of Matter</div>
+  </div>
+  <div class="menu-body">
+    <div class="menu-greeting" id="menu-greeting">Hello, Scholar!</div>
+    <div class="menu-title">Choose Your Zone</div>
+    <div class="menu-cards">
+      <div class="menu-card" onclick="showLab()">
+        <div class="icon">🔬</div>
+        <h3>Interactive Lab</h3>
+        <p>4 hands-on simulations: Heating, Cooling, Phase points, Latent Heat & Sublimation</p>
+      </div>
+      <div class="menu-card" onclick="showQuiz()">
+        <div class="icon">🏆</div>
+        <h3>KBC Challenge</h3>
+        <p>40 quiz questions styled like Kaun Banega Crorepati. Test your knowledge!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 3: INTERACTIVE LAB
+═══════════════════════════════════════════════ -->
+<div id="screen-lab" class="screen">
+  <div class="brand-header" style="display:flex;align-items:center;gap:12px;justify-content:space-between;padding:10px 16px;">
+    <button class="back-btn" onclick="showMenu()">← Menu</button>
+    <div class="brand-title" style="font-size:1rem;">🔬 Interactive Lab</div>
+    <div style="width:80px"></div>
+  </div>
+
+  <div class="lab-nav">
+    <button id="lab-tab-0" class="active" onclick="switchActivity(0)">🌡️ Heating</button>
+    <button id="lab-tab-1"             onclick="switchActivity(1)">❄️ Cooling</button>
+    <button id="lab-tab-2"             onclick="switchActivity(2)">⚖️ Phase Points</button>
+    <button id="lab-tab-3"             onclick="switchActivity(3)">📈 Latent Heat</button>
+  </div>
+
+  <!-- Activity containers -->
+  <div id="lab-activity-0" class="lab-content">
+    <div class="canvas-wrap" style="height:260px">
+      <canvas id="heatCanvas" height="260"></canvas>
+    </div>
+    <div class="lab-controls">
+      <div class="ctrl-row">
+        <label>Temperature</label>
+        <input type="range" id="heatSlider" min="0" max="100" value="0" oninput="updateHeat(this.value)">
+        <span id="heatTempLabel" style="color:var(--gold);font-weight:700;min-width:55px">0°C</span>
+        <span id="heatStateBadge" class="state-badge badge-solid">ICE ❄️</span>
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>How it works:</strong> Drag the slider to add heat. Watch particles change from a rigid lattice (Solid/Ice) → flowing liquid (Water) → freely flying gas (Steam). This is the <strong>Kinetic Theory of Matter</strong> in action!
+    </div>
+  </div>
+
+  <div id="lab-activity-1" class="lab-content" style="display:none">
+    <div class="canvas-wrap" style="height:260px">
+      <canvas id="coolCanvas" height="260"></canvas>
+    </div>
+    <div class="lab-controls">
+      <div class="ctrl-row">
+        <label>Temperature</label>
+        <input type="range" id="coolSlider" min="0" max="100" value="100" oninput="updateCool(this.value)">
+        <span id="coolTempLabel" style="color:var(--cyan);font-weight:700;min-width:55px">100°C</span>
+        <span id="coolStateBadge" class="state-badge badge-gas">STEAM 💨</span>
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>Cooling Process:</strong> Drag left to cool the gas. Steam → <strong>Condensation</strong> (gas to liquid) → <strong>Freezing</strong> (liquid to solid). Particles slow down and come closer together as energy is removed.
+    </div>
+  </div>
+
+  <div id="lab-activity-2" class="lab-content" style="display:none">
+    <div style="display:flex;gap:24px;align-items:flex-end;justify-content:center;width:100%;max-width:640px">
+      <div class="canvas-wrap" style="height:260px;flex:1">
+        <canvas id="phaseCanvas" height="260"></canvas>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="thermo">
+          <div id="thermoFill" class="thermo-fill" style="height:5%"></div>
+        </div>
+        <div id="thermoVal" style="color:var(--gold);font-weight:700;font-size:1.1rem">-10°C</div>
+        <span id="phaseStateBadge" class="state-badge badge-solid">ICE ❄️</span>
+      </div>
+    </div>
+    <div class="lab-controls">
+      <div class="ctrl-row" style="gap:12px">
+        <button class="lab-btn" id="phaseHeatBtn" onclick="applyPhaseHeat()">🔥 Apply Heat</button>
+        <button class="lab-btn" onclick="resetPhase()">↺ Reset</button>
+      </div>
+      <div id="phaseInfo" style="color:#aab;font-size:0.82rem;margin-top:4px">Click "Apply Heat" to raise the temperature.</div>
+    </div>
+    <div class="info-box">
+      <strong>Key Points:</strong> Temperature pauses at <strong>0°C (Melting Point)</strong> while ice converts to water, then again at <strong>100°C (Boiling Point)</strong> while water converts to steam. The energy goes into changing state, NOT raising temperature.
+    </div>
+  </div>
+
+  <div id="lab-activity-3" class="lab-content" style="display:none">
+    <div class="canvas-wrap" style="height:260px">
+      <canvas id="graphCanvas" height="260"></canvas>
+    </div>
+    <div class="canvas-wrap" style="height:180px;margin-top:0">
+      <canvas id="subCanvas" height="180"></canvas>
+    </div>
+    <div class="lab-controls">
+      <div class="ctrl-row" style="gap:12px;flex-wrap:wrap">
+        <button class="lab-btn" id="graphBtn"  onclick="startGraph()">📈 Start Graph</button>
+        <button class="lab-btn" id="subBtn"    onclick="dropDryIce()">🧊 Drop Dry Ice</button>
+        <button class="lab-btn" onclick="resetLatent()">↺ Reset</button>
+      </div>
+      <div id="latentInfo" style="color:#aab;font-size:0.82rem;margin-top:4px">Click "Start Graph" to see Latent Heat plateaus in real time.</div>
+    </div>
+    <div class="info-box">
+      <strong>Latent Heat:</strong> The flat sections of the graph show that temperature does NOT change during a phase change. Energy called <strong>Latent Heat of Fusion (0°C)</strong> and <strong>Latent Heat of Vaporization (100°C)</strong> is absorbed without changing temperature.<br><br>
+      <strong>Sublimation:</strong> Dry Ice (solid CO₂) turns <strong>directly into gas</strong> without becoming a liquid!
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 4: KBC QUIZ
+═══════════════════════════════════════════════ -->
+<div id="screen-quiz" class="screen">
+  <div class="brand-header">
+    <div class="brand-title">🏆 KBC Challenge</div>
+    <div class="brand-sub">States of Matter · Biplab Bothra Institute</div>
+  </div>
+  <div class="kbc-wrap">
+    <div class="kbc-top-bar">
+      <button class="back-btn" onclick="showMenu();stopQuiz()">← Menu</button>
+      <div class="kbc-score-box">Score: <span id="kbc-score">0</span></div>
+      <div class="kbc-q-counter"><span id="kbc-qnum">1</span>/40</div>
+    </div>
+    <div class="kbc-progress"><div class="kbc-progress-fill" id="kbc-prog" style="width:0%"></div></div>
+    <div class="kbc-question-box">
+      <div class="kbc-q-num" id="kbc-q-label">Q 1</div>
+      <div class="kbc-question-text" id="kbc-question">Loading...</div>
+    </div>
+    <div class="kbc-options" id="kbc-options"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 5: FINAL RESULT
+═══════════════════════════════════════════════ -->
+<div id="screen-result" class="screen">
+  <div class="sparkles" id="sparkles-container"></div>
+  <div class="result-card" style="position:relative;z-index:1">
+    <div class="trophy" id="result-trophy">🏆</div>
+    <div class="result-name" id="result-name">Well Done!</div>
+    <div style="color:#aab;font-size:0.85rem;margin-bottom:8px" id="result-class"></div>
+    <div class="result-stars" id="result-stars">⭐⭐⭐</div>
+    <div class="result-score-big" id="result-score">0/40</div>
+    <div class="result-msg" id="result-msg">Great attempt!</div>
+    <button class="share-btn" onclick="shareScore()">
+      <span>📲</span> Share on WhatsApp
+    </button>
+    <div class="copy-tip">Tap above to copy your score — paste it in WhatsApp!</div>
+    <button class="btn-gold" onclick="showMenu();resetQuiz()" style="margin-top:4px">🔁 Play Again</button>
+  </div>
+</div>
+
+<script>
+/* =============================================
+   STATE & STUDENT DATA
+============================================= */
+let student = { name:'', email:'', cls:'' };
+let audioCtx = null;
+
+function getAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+/* =============================================
+   SCREEN ROUTING
+============================================= */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startLearning() {
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const cls   = document.getElementById('reg-class').value;
+  const err   = document.getElementById('reg-error');
+  if (!name || !email || !cls) {
+    err.textContent = '⚠️ Please fill in all fields to continue.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = '⚠️ Please enter a valid email address.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  student = { name, email, cls };
+  showMenu();
+}
+
+function showMenu() {
+  showScreen('screen-menu');
+  document.getElementById('menu-greeting').textContent =
+    `👋 Hello, ${student.name || 'Scholar'}! (${student.cls || ''})`;
+  stopAllSimulations();
+}
+
+function showLab() {
+  showScreen('screen-lab');
+  switchActivity(0);
+}
+
+function showQuiz() {
+  showScreen('screen-quiz');
+  startQuiz();
+}
+
+function showResult() {
+  buildSparkles();
+  showScreen('screen-result');
+}
+
+/* =============================================
+   AUDIO ENGINE – Web Audio API
+============================================= */
+function playCorrectSound() {
+  const ac = getAudio();
+  const notes = [523.25, 659.25, 783.99]; // C5 E5 G5 chord
+  notes.forEach((freq, i) => {
+    const osc  = ac.createOscillator();
+    const gain = ac.createGain();
+    osc.connect(gain); gain.connect(ac.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, ac.currentTime + i * 0.08);
+    gain.gain.setValueAtTime(0, ac.currentTime + i * 0.08);
+    gain.gain.linearRampToValueAtTime(0.25, ac.currentTime + i * 0.08 + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + i * 0.08 + 0.5);
+    osc.start(ac.currentTime + i * 0.08);
+    osc.stop(ac.currentTime + i * 0.08 + 0.6);
+  });
+}
+
+function playWrongSound() {
+  const ac = getAudio();
+  const osc  = ac.createOscillator();
+  const gain = ac.createGain();
+  osc.connect(gain); gain.connect(ac.destination);
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(200, ac.currentTime);
+  osc.frequency.linearRampToValueAtTime(80, ac.currentTime + 0.4);
+  gain.gain.setValueAtTime(0.3, ac.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.5);
+  osc.start(ac.currentTime);
+  osc.stop(ac.currentTime + 0.5);
+}
+
+/* =============================================
+   PARTICLE SYSTEM – shared utilities
+============================================= */
+class Particle {
+  constructor(x, y, vx, vy, color) {
+    this.x = x; this.y = y;
+    this.vx = vx; this.vy = vy;
+    this.color = color;
+    this.r = 5;
+    this.ox = x; this.oy = y; // original position for solid lattice
+  }
+}
+
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function rnd(lo, hi) { return lo + Math.random() * (hi - lo); }
+
+/* =============================================
+   ACTIVITY 0 – HEATING SIMULATOR
+============================================= */
+let heatParticles = [];
+let heatAnimId   = null;
+
+function initHeatCanvas() {
+  const canvas = document.getElementById('heatCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth || 600;
+  buildHeatParticles(canvas);
+  heatLoop();
+}
+
+function buildHeatParticles(canvas) {
+  heatParticles = [];
+  const cols = 8, rows = 5;
+  const cx = canvas.width / 2, cy = canvas.height / 2;
+  const spacingX = 48, spacingY = 36;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = cx - ((cols-1)*spacingX/2) + c*spacingX;
+      const y = cy - ((rows-1)*spacingY/2) + r*spacingY;
+      heatParticles.push(new Particle(x, y, 0, 0, '#A8DAFF'));
+    }
+  }
+}
+
+function updateHeat(val) {
+  const t = parseInt(val);
+  document.getElementById('heatTempLabel').textContent = t + '°C';
+  const badge = document.getElementById('heatStateBadge');
+  if (t < 20) {
+    badge.className = 'state-badge badge-solid'; badge.textContent = 'ICE ❄️';
+  } else if (t < 70) {
+    badge.className = 'state-badge badge-liquid'; badge.textContent = 'WATER 💧';
+  } else {
+    badge.className = 'state-badge badge-gas'; badge.textContent = 'STEAM 💨';
+  }
+}
+
+function heatLoop() {
+  const canvas = document.getElementById('heatCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const t = parseInt(document.getElementById('heatSlider').value);
+  const W = canvas.width, H = canvas.height;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw background gradient based on temp
+  const grad = ctx.createLinearGradient(0, H, 0, 0);
+  if (t < 20) {
+    grad.addColorStop(0, '#0A1A3A'); grad.addColorStop(1, '#0A0A2E');
+  } else if (t < 70) {
+    grad.addColorStop(0, '#0A2A3A'); grad.addColorStop(1, '#0A0A2E');
+  } else {
+    grad.addColorStop(0, '#3A1A0A'); grad.addColorStop(1, '#0A0A2E');
+  }
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Temperature label in canvas
+  ctx.fillStyle = 'rgba(255,215,0,0.7)';
+  ctx.font = 'bold 14px Poppins,sans-serif';
+  ctx.fillText(t + '°C', 14, 22);
+
+  heatParticles.forEach(p => {
+    if (t < 20) {
+      // SOLID – tight lattice vibration
+      const jitter = t * 0.015;
+      p.x = p.ox + rnd(-jitter, jitter);
+      p.y = p.oy + rnd(-jitter, jitter);
+      p.color = '#A8DAFF';
+    } else if (t < 70) {
+      // LIQUID – slow drift near bottom half
+      const speed = 0.4 + (t-20)*0.015;
+      p.vx += rnd(-0.1,0.1);
+      p.vy += rnd(-0.05,0.1);
+      p.vx = clamp(p.vx, -speed, speed);
+      p.vy = clamp(p.vy, -speed, speed);
+      p.x  = clamp(p.x + p.vx, p.r, W - p.r);
+      p.y  = clamp(p.y + p.vy, H*0.3, H - p.r);
+      p.color = '#00E5FF';
+    } else {
+      // GAS – free movement everywhere
+      const speed = 1.5 + (t-70)*0.05;
+      p.vx += rnd(-0.2,0.2);
+      p.vy += rnd(-0.2,0.2);
+      const mag = Math.hypot(p.vx, p.vy);
+      if (mag > speed) { p.vx = p.vx/mag*speed; p.vy = p.vy/mag*speed; }
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < p.r || p.x > W-p.r) p.vx *= -1;
+      if (p.y < p.r || p.y > H-p.r) p.vy *= -1;
+      p.color = '#FF8C00';
+    }
+
+    // Draw particle
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.shadowBlur = 6; ctx.shadowColor = p.color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  });
+
+  heatAnimId = requestAnimationFrame(heatLoop);
+}
+
+/* =============================================
+   ACTIVITY 1 – COOLING SIMULATOR
+============================================= */
+let coolParticles = [];
+let coolAnimId   = null;
+
+function initCoolCanvas() {
+  const canvas = document.getElementById('coolCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth || 600;
+  coolParticles = [];
+  const cols = 8, rows = 5;
+  const W = canvas.width, H = canvas.height;
+  for (let i = 0; i < 40; i++) {
+    coolParticles.push(new Particle(
+      rnd(20, W-20), rnd(20, H-20),
+      rnd(-3,3), rnd(-3,3), '#FF8C00'
+    ));
+  }
+  coolLoop();
+}
+
+function updateCool(val) {
+  const t = parseInt(val);
+  document.getElementById('coolTempLabel').textContent = t + '°C';
+  const badge = document.getElementById('coolStateBadge');
+  if (t < 20) {
+    badge.className = 'state-badge badge-solid'; badge.textContent = 'ICE ❄️';
+  } else if (t < 70) {
+    badge.className = 'state-badge badge-liquid'; badge.textContent = 'WATER 💧';
+  } else {
+    badge.className = 'state-badge badge-gas'; badge.textContent = 'STEAM 💨';
+  }
+}
+
+function coolLoop() {
+  const canvas = document.getElementById('coolCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const t = parseInt(document.getElementById('coolSlider').value);
+  const W = canvas.width, H = canvas.height;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#080824';
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.fillStyle = 'rgba(0,229,255,0.7)';
+  ctx.font = 'bold 14px Poppins,sans-serif';
+  ctx.fillText(t + '°C', 14, 22);
+
+  coolParticles.forEach((p, i) => {
+    if (t >= 70) {
+      // GAS
+      const speed = 1.5 + (t-70)*0.05;
+      p.vx += rnd(-0.2,0.2); p.vy += rnd(-0.2,0.2);
+      const mag = Math.hypot(p.vx,p.vy);
+      if (mag > speed) { p.vx=p.vx/mag*speed; p.vy=p.vy/mag*speed; }
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 5 || p.x > W-5) p.vx *= -1;
+      if (p.y < 5 || p.y > H-5) p.vy *= -1;
+      p.color = '#FF8C00';
+    } else if (t >= 20) {
+      // LIQUID
+      const speed = 0.4 + (t-20)*0.015;
+      p.vx += rnd(-0.1,0.1); p.vy += rnd(-0.05,0.1);
+      p.vx = clamp(p.vx,-speed,speed); p.vy = clamp(p.vy,-speed,speed);
+      p.x = clamp(p.x+p.vx,5,W-5);
+      p.y = clamp(p.y+p.vy, H*0.3, H-5);
+      p.color = '#00E5FF';
+    } else {
+      // SOLID – snap to grid
+      const cols=8, rows=5;
+      const col=i%cols, row=Math.floor(i/cols);
+      const tx = 30 + col*(W-60)/(cols-1);
+      const ty = H*0.3 + row*(H*0.65)/(rows-1);
+      const jitter = t * 0.015;
+      p.x = tx + rnd(-jitter,jitter);
+      p.y = ty + rnd(-jitter,jitter);
+      p.color = '#A8DAFF';
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 5, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.shadowBlur=6; ctx.shadowColor=p.color;
+    ctx.fill();
+    ctx.shadowBlur=0;
+  });
+
+  coolAnimId = requestAnimationFrame(coolLoop);
+}
+
+/* =============================================
+   ACTIVITY 2 – PHASE POINTS (Thermometer)
+============================================= */
+let phaseTemp     = -10;   // starts cold
+let phaseTarget   = -10;
+let phaseAnimId   = null;
+let phaseHeating  = false;
+let phaseState    = 'solid'; // solid | melting | liquid | boiling | gas
+let phaseAnimPaused = false;
+let phaseParticles = [];
+
+function initPhaseCanvas() {
+  const canvas = document.getElementById('phaseCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth || 400;
+  buildPhaseParticles(canvas);
+  phaseLoop();
+}
+
+function buildPhaseParticles(canvas) {
+  phaseParticles = [];
+  const cols=7, rows=4;
+  const W=canvas.width, H=canvas.height;
+  const spacingX=42, spacingY=36;
+  const cx=W/2, cy=H*0.55;
+  for (let r=0;r<rows;r++) for (let c=0;c<cols;c++) {
+    const x=cx-((cols-1)*spacingX/2)+c*spacingX;
+    const y=cy-((rows-1)*spacingY/2)+r*spacingY;
+    phaseParticles.push(new Particle(x,y,rnd(-0.1,0.1),rnd(-0.1,0.1),'#A8DAFF'));
+  }
+}
+
+function applyPhaseHeat() {
+  if (phaseHeating) return;
+  phaseHeating = true;
+  document.getElementById('phaseHeatBtn').disabled = true;
+  animatePhase();
+}
+
+function animatePhase() {
+  const step = 0.3;
+  // Define stage temperatures
+  const stages = [
+    {temp:0,   pause:true,  state:'melting', label:'⏸ Melting at 0°C (Melting Point)'},
+    {temp:100, pause:true,  state:'boiling', label:'⏸ Boiling at 100°C (Boiling Point)'},
+    {temp:120, pause:false, state:'gas',     label:'✅ Steam at 120°C'},
+  ];
+  const targets = [-10,0,0,100,100,120];
+
+  const tick = () => {
+    if (!phaseHeating) return;
+    if (phaseTemp < 0) {
+      phaseTemp = Math.min(0, phaseTemp + step);
+      phaseState = 'solid';
+      setPhaseInfo('🔥 Heating Ice... Temperature Rising');
+    } else if (phaseTemp === 0 && phaseState !== 'liquid') {
+      // pause at 0
+      phaseState = 'melting';
+      setPhaseInfo('⏸ MELTING POINT (0°C) — Energy converts ice to water. Temperature stays at 0°C!');
+      // hold for 3 seconds then move to liquid
+      setTimeout(() => {
+        if (!phaseHeating) return;
+        phaseState = 'liquid';
+        phaseTemp = 0.1;
+        phaseAnimId = requestAnimationFrame(tick);
+      }, 3000);
+      return;
+    } else if (phaseTemp < 100 && phaseState === 'liquid') {
+      phaseTemp = Math.min(100, phaseTemp + step);
+      setPhaseInfo('🔥 Heating Water... Temperature Rising');
+    } else if (phaseTemp >= 100 && phaseState === 'liquid') {
+      phaseState = 'boiling';
+      phaseTemp = 100;
+      setPhaseInfo('⏸ BOILING POINT (100°C) — Energy converts water to steam. Temperature stays at 100°C!');
+      setTimeout(() => {
+        if (!phaseHeating) return;
+        phaseState = 'gas';
+        phaseTemp = 100.1;
+        phaseAnimId = requestAnimationFrame(tick);
+      }, 3000);
+      return;
+    } else if (phaseTemp < 120 && phaseState === 'gas') {
+      phaseTemp = Math.min(120, phaseTemp + step);
+      setPhaseInfo('✅ Now fully Steam (Gas) at ' + phaseTemp.toFixed(0) + '°C');
+    } else {
+      setPhaseInfo('✅ Complete! Steam at 120°C. Click Reset to restart.');
+      phaseHeating = false;
+      document.getElementById('phaseHeatBtn').disabled = false;
+      return;
+    }
+
+    updateThermoDisplay();
+    phaseAnimId = requestAnimationFrame(tick);
+  };
+  phaseAnimId = requestAnimationFrame(tick);
+}
+
+function setPhaseInfo(msg) {
+  const el = document.getElementById('phaseInfo');
+  if (el) el.textContent = msg;
+}
+
+function updateThermoDisplay() {
+  const fill = document.getElementById('thermoFill');
+  const val  = document.getElementById('thermoVal');
+  const badge= document.getElementById('phaseStateBadge');
+  if (!fill) return;
+
+  // Map -10 to 120 → 5% to 95%
+  const pct = ((phaseTemp + 10) / 130) * 90 + 5;
+  fill.style.height = pct + '%';
+
+  const colors = {solid:'#A8DAFF', melting:'#88AAFF', liquid:'#00E5FF', boiling:'#00AAFF', gas:'#FF8C00'};
+  fill.style.background = colors[phaseState] || '#00E5FF';
+  val.textContent = phaseTemp.toFixed(0) + '°C';
+  val.style.color  = phaseTemp < 0 ? 'var(--ice)' : phaseTemp >= 100 ? '#FF8C00' : '#00E5FF';
+
+  if      (phaseState==='solid')  { badge.className='state-badge badge-solid'; badge.textContent='ICE ❄️'; }
+  else if (phaseState==='melting'){ badge.className='state-badge badge-solid'; badge.textContent='MELTING 🔄'; }
+  else if (phaseState==='liquid') { badge.className='state-badge badge-liquid'; badge.textContent='WATER 💧'; }
+  else if (phaseState==='boiling'){ badge.className='state-badge badge-liquid'; badge.textContent='BOILING ♨️'; }
+  else                            { badge.className='state-badge badge-gas'; badge.textContent='STEAM 💨'; }
+}
+
+function phaseLoop() {
+  const canvas = document.getElementById('phaseCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#080824';
+  ctx.fillRect(0,0,W,H);
+
+  phaseParticles.forEach((p,i) => {
+    const state = phaseState;
+    if (state==='solid'||state==='melting') {
+      const cols=7;
+      const col=i%cols, row=Math.floor(i/cols);
+      const spacingX=42, spacingY=36;
+      const cx=W/2, cy=H*0.55;
+      const rows=4;
+      const tx=cx-((cols-1)*spacingX/2)+col*spacingX;
+      const ty=cy-((rows-1)*spacingY/2)+row*spacingY;
+      const jitter = state==='melting' ? 2 : 0.8;
+      p.x = tx + rnd(-jitter,jitter);
+      p.y = ty + rnd(-jitter,jitter);
+      p.color = state==='melting' ? '#88AAFF' : '#A8DAFF';
+    } else if (state==='liquid'||state==='boiling') {
+      const speed = state==='boiling' ? 2 : 0.8;
+      p.vx += rnd(-0.15,0.15); p.vy += rnd(-0.05,0.1);
+      p.vx = clamp(p.vx,-speed,speed); p.vy = clamp(p.vy,-speed,speed);
+      p.x = clamp(p.x+p.vx,6,W-6);
+      p.y = clamp(p.y+p.vy, H*0.3, H-6);
+      p.color = '#00E5FF';
+    } else {
+      const speed = 2.5;
+      p.vx += rnd(-0.3,0.3); p.vy += rnd(-0.3,0.3);
+      const mag=Math.hypot(p.vx,p.vy);
+      if (mag>speed){p.vx=p.vx/mag*speed;p.vy=p.vy/mag*speed;}
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<6||p.x>W-6)p.vx*=-1;
+      if(p.y<6||p.y>H-6)p.vy*=-1;
+      p.color = '#FF8C00';
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,5,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.shadowBlur=6; ctx.shadowColor=p.color;
+    ctx.fill(); ctx.shadowBlur=0;
+  });
+
+  phaseAnimId = requestAnimationFrame(phaseLoop);
+}
+
+function resetPhase() {
+  phaseHeating=false;
+  phaseTemp=-10;
+  phaseState='solid';
+  document.getElementById('phaseHeatBtn').disabled=false;
+  setPhaseInfo('Click "Apply Heat" to raise the temperature.');
+  updateThermoDisplay();
+  const canvas=document.getElementById('phaseCanvas');
+  if(canvas) buildPhaseParticles(canvas);
+}
+
+/* =============================================
+   ACTIVITY 3 – LATENT HEAT GRAPH + SUBLIMATION
+============================================= */
+let graphRunning = false;
+let graphT=0, graphTime=0;
+let graphData=[];     // {time,temp}
+let graphAnimId=null;
+let subParticles=[];
+let subState='empty'; // empty | solid | subliming | gas
+let subAnimId=null;
+
+/* Graph temperature profile:
+   0-2s: -10 → 0  (heating solid)
+   2-5s: stays 0  (latent heat fusion)
+   5-8s: 0 → 100  (heating liquid)
+   8-11s: stays 100 (latent heat vap)
+   11-13s: 100→120 (steam) */
+function graphTempAtTime(t) {
+  if (t < 2)  return lerp(-10,  0,  t/2);
+  if (t < 5)  return 0;
+  if (t < 8)  return lerp(0,  100, (t-5)/3);
+  if (t < 11) return 100;
+  if (t < 13) return lerp(100,120,(t-11)/2);
+  return 120;
+}
+
+function startGraph() {
+  if (graphRunning) return;
+  graphRunning=true;
+  graphData=[];
+  graphTime=0;
+  document.getElementById('graphBtn').disabled=true;
+  document.getElementById('latentInfo').textContent='📈 Graphing temperature over time...';
+  runGraph();
+}
+
+function runGraph() {
+  const canvas=document.getElementById('graphCanvas');
+  if(!canvas||!graphRunning) return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+
+  // Advance time
+  graphTime+=0.05;
+  const temp=graphTempAtTime(graphTime);
+  graphData.push({time:graphTime, temp});
+
+  // Update latent info
+  if (graphTime>=2 && graphTime<=5) {
+    document.getElementById('latentInfo').textContent=
+      '❄️→💧 LATENT HEAT OF FUSION at 0°C — Temperature plateau! Energy melts ice, not raises temp.';
+  } else if (graphTime>=8 && graphTime<=11) {
+    document.getElementById('latentInfo').textContent=
+      '💧→💨 LATENT HEAT OF VAPORIZATION at 100°C — Another plateau! Energy vaporises water.';
+  } else {
+    document.getElementById('latentInfo').textContent=
+      `🌡️ Temperature: ${temp.toFixed(1)}°C | Time: ${graphTime.toFixed(1)}s`;
+  }
+
+  // Draw graph
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#080824';
+  ctx.fillRect(0,0,W,H);
+
+  const padL=52,padR=20,padT=20,padB=40;
+  const gW=W-padL-padR, gH=H-padT-padB;
+  const maxTime=13, minTemp=-10, maxTemp=120;
+
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,0.07)';
+  ctx.lineWidth=1;
+  for(let i=0;i<=6;i++){
+    const y=padT+gH*(1-i/6);
+    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(padL+gW,y); ctx.stroke();
+    ctx.fillStyle='#667';
+    ctx.font='10px Poppins,sans-serif';
+    ctx.textAlign='right';
+    ctx.fillText(Math.round(minTemp+i*(maxTemp-minTemp)/6)+'°',padL-4,y+4);
+  }
+  for(let i=0;i<=6;i++){
+    const x=padL+gW*i/6;
+    ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,padT+gH); ctx.stroke();
+    ctx.fillStyle='#667';
+    ctx.textAlign='center';
+    ctx.fillText((maxTime*i/6).toFixed(0)+'s',x,padT+gH+14);
+  }
+
+  // Axes
+  ctx.strokeStyle='rgba(255,215,0,0.5)';
+  ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(padL,padT); ctx.lineTo(padL,padT+gH); ctx.lineTo(padL+gW,padT+gH); ctx.stroke();
+
+  // Axis labels
+  ctx.fillStyle='var(--gold)';
+  ctx.font='11px Poppins,sans-serif';
+  ctx.textAlign='center';
+  ctx.fillText('Time (s)', padL+gW/2, H-4);
+  ctx.save(); ctx.translate(14,padT+gH/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('Temp (°C)', 0, 0); ctx.restore();
+
+  // Plot line
+  if(graphData.length>1){
+    ctx.beginPath();
+    ctx.strokeStyle='#00E5FF';
+    ctx.lineWidth=2.5;
+    graphData.forEach((d,i)=>{
+      const x=padL+gW*(d.time/maxTime);
+      const y=padT+gH*(1-(d.temp-minTemp)/(maxTemp-minTemp));
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+
+    // Highlight plateau zones
+    [[2,5,'Latent Heat of Fusion'],[8,11,'Latent Heat of Vaporization']].forEach(([t1,t2,lbl])=>{
+      const x1=padL+gW*(t1/maxTime), x2=padL+gW*(t2/maxTime);
+      if(graphTime>=t1){
+        ctx.fillStyle='rgba(255,140,0,0.12)';
+        ctx.fillRect(x1,padT,Math.min(x2,padL+gW*(Math.min(graphTime,t2)/maxTime))-x1,gH);
+        if(graphTime>=t1+0.5){
+          ctx.fillStyle='rgba(255,140,0,0.8)';
+          ctx.font='bold 9px Poppins,sans-serif';
+          ctx.textAlign='center';
+          ctx.fillText(lbl, (x1+Math.min(x2,padL+gW*(Math.min(graphTime,t2)/maxTime)))/2, padT+14);
+        }
+      }
+    });
+  }
+
+  if (graphTime < 13) {
+    graphAnimId = requestAnimationFrame(runGraph);
+  } else {
+    graphRunning=false;
+    document.getElementById('graphBtn').disabled=false;
+    document.getElementById('latentInfo').textContent='✅ Graph complete! The flat plateaus show Latent Heat absorption.';
+  }
+}
+
+/* Sublimation */
+function initSubCanvas() {
+  const canvas=document.getElementById('subCanvas');
+  if(!canvas) return;
+  canvas.width=canvas.offsetWidth||600;
+  subParticles=[];
+  subState='empty';
+  drawSubEmpty();
+  subLoop();
+}
+
+function dropDryIce() {
+  if(subState==='solid'||subState==='subliming'||subState==='gas') return;
+  subState='solid';
+  const canvas=document.getElementById('subCanvas');
+  if(!canvas) return;
+  const W=canvas.width, H=canvas.height;
+  subParticles=[];
+  const cols=8, rows=3;
+  const spacingX=32, spacingY=28;
+  const cx=W/2, cy=H*0.6;
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const x=cx-((cols-1)*spacingX/2)+c*spacingX;
+    const y=cy-((rows-1)*spacingY/2)+r*spacingY;
+    subParticles.push({x,y,ox:x,oy:y,vx:0,vy:0,state:'solid',opacity:1,color:'#88CCFF'});
+  }
+  document.getElementById('latentInfo').textContent='🧊 Dry Ice dropped! Watch CO₂ go straight from solid to gas (Sublimation)!';
+  // After 1.5s start sublimation
+  setTimeout(()=>{
+    subState='subliming';
+    subParticles.forEach(p=>{ p.state='subliming'; p.vx=rnd(-3,3); p.vy=rnd(-4,-1); });
+  },1500);
+}
+
+function drawSubEmpty() {
+  const canvas=document.getElementById('subCanvas');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='#080824'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='rgba(255,215,0,0.4)';
+  ctx.font='13px Poppins,sans-serif'; ctx.textAlign='center';
+  ctx.fillText('👆 Click "Drop Dry Ice" to see Sublimation', canvas.width/2, canvas.height/2);
+}
+
+function subLoop() {
+  const canvas=document.getElementById('subCanvas');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#080824'; ctx.fillRect(0,0,W,H);
+
+  if(subState==='empty'){ drawSubEmpty(); subAnimId=requestAnimationFrame(subLoop); return; }
+
+  // label
+  ctx.fillStyle='rgba(0,229,255,0.7)'; ctx.font='11px Poppins'; ctx.textAlign='left';
+  ctx.fillText(subState==='solid'?'Solid Dry Ice (CO₂)':subState==='subliming'?'Sublimating... ☁️':'Gas Phase (CO₂)', 10, 20);
+
+  let allGone=true;
+  subParticles.forEach(p=>{
+    if(subState==='solid'){
+      // vibrate in place
+      p.x=p.ox+rnd(-1,1); p.y=p.oy+rnd(-1,1);
+      ctx.beginPath(); ctx.arc(p.x,p.y,5,0,Math.PI*2);
+      ctx.fillStyle='#88CCFF'; ctx.shadowBlur=4; ctx.shadowColor='#88CCFF';
+      ctx.fill(); ctx.shadowBlur=0;
+      allGone=false;
+    } else if(subState==='subliming'){
+      p.x+=p.vx; p.y+=p.vy;
+      p.vy-=0.04; // slight upward drift
+      p.opacity=Math.max(0,p.opacity-0.008);
+      if(p.x<0||p.x>W) p.vx*=-0.5;
+      if(p.opacity>0){
+        ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2);
+        ctx.fillStyle=`rgba(180,230,255,${p.opacity})`;
+        ctx.shadowBlur=6; ctx.shadowColor='#A8DAFF';
+        ctx.fill(); ctx.shadowBlur=0;
+        allGone=false;
+      }
+    }
+  });
+
+  if(allGone && subState==='subliming'){
+    subState='gas';
+    document.getElementById('latentInfo').textContent='✅ All solid CO₂ is now gas — No liquid stage! That\'s Sublimation.';
+  }
+
+  subAnimId=requestAnimationFrame(subLoop);
+}
+
+/* =============================================
+   LAB – ACTIVITY SWITCHER
+============================================= */
+let currentActivity=-1;
+
+function switchActivity(n) {
+  stopAllSimulations();
+  currentActivity=n;
+  for(let i=0;i<4;i++){
+    const el=document.getElementById('lab-activity-'+i);
+    const btn=document.getElementById('lab-tab-'+i);
+    if(el) el.style.display=(i===n)?'flex':'none';
+    if(btn) btn.classList.toggle('active', i===n);
+  }
+  // Init the chosen activity
+  setTimeout(()=>{
+    if(n===0) initHeatCanvas();
+    if(n===1) initCoolCanvas();
+    if(n===2){ initPhaseCanvas(); updateThermoDisplay(); }
+    if(n===3){ initGraphCanvas(); initSubCanvas(); }
+  }, 50);
+}
+
+function initGraphCanvas(){
+  const c=document.getElementById('graphCanvas');
+  if(!c) return;
+  c.width=c.offsetWidth||600;
+}
+
+function stopAllSimulations(){
+  if(heatAnimId) cancelAnimationFrame(heatAnimId); heatAnimId=null;
+  if(coolAnimId) cancelAnimationFrame(coolAnimId); coolAnimId=null;
+  if(phaseAnimId) cancelAnimationFrame(phaseAnimId); phaseAnimId=null;
+  if(graphAnimId) cancelAnimationFrame(graphAnimId); graphAnimId=null;
+  if(subAnimId) cancelAnimationFrame(subAnimId); subAnimId=null;
+  phaseHeating=false;
+  graphRunning=false;
+}
+
+function resetLatent(){
+  graphRunning=false;
+  graphData=[];
+  graphTime=0;
+  document.getElementById('graphBtn').disabled=false;
+  subState='empty';
+  subParticles=[];
+  document.getElementById('latentInfo').textContent='Click "Start Graph" to see Latent Heat plateaus in real time.';
+  initGraphCanvas();
+  drawSubEmpty();
+}
+
+/* =============================================
+   KBC QUIZ – 40 QUESTIONS
+============================================= */
+const ALL_QUESTIONS = [
+  // Fundamentals – Class 6
+  {q:"Which of the following is NOT a state of matter?",
+   opts:["Solid","Liquid","Gas","Energy"], ans:3},
+  {q:"In which state of matter do particles have the LEAST amount of energy?",
+   opts:["Gas","Plasma","Solid","Liquid"], ans:2},
+  {q:"Which state of matter has a definite shape and definite volume?",
+   opts:["Gas","Liquid","Solid","Plasma"], ans:2},
+  {q:"Which state of matter has NO definite shape but a definite volume?",
+   opts:["Solid","Liquid","Gas","Vacuum"], ans:1},
+  {q:"What happens to the particles of a solid when it is heated?",
+   opts:["They stop moving","They move faster","They become smaller","They disappear"], ans:1},
+  {q:"Which property allows gases to fill any container completely?",
+   opts:["Fixed volume","High density","No definite shape or volume","Rigid structure"], ans:2},
+  {q:"Water is an example of a ________ at room temperature.",
+   opts:["Solid","Gas","Liquid","Plasma"], ans:2},
+  {q:"The process of a solid changing to a liquid is called:",
+   opts:["Evaporation","Condensation","Melting","Sublimation"], ans:2},
+  {q:"In which state are the particles most closely packed together?",
+   opts:["Gas","Liquid","Solid","All are equal"], ans:2},
+  {q:"Which of the following is an example of a solid?",
+   opts:["Mercury vapour","Oxygen","Iron","Alcohol"], ans:2},
+
+  // Kinetic Theory – Class 6/7
+  {q:"The Kinetic Theory states that all matter is made of:",
+   opts:["Waves","Particles in motion","Static atoms","Energy fields"], ans:1},
+  {q:"What is the force that holds particles together called?",
+   opts:["Gravity","Magnetic force","Intermolecular force","Nuclear force"], ans:2},
+  {q:"In which state of matter is the intermolecular force WEAKEST?",
+   opts:["Solid","Liquid","Gas","All the same"], ans:2},
+  {q:"As temperature increases, kinetic energy of particles:",
+   opts:["Decreases","Stays the same","Increases","Disappears"], ans:2},
+  {q:"Brownian Motion is evidence for which theory?",
+   opts:["Theory of Relativity","Kinetic Theory of Matter","Atomic Theory","Wave Theory"], ans:1},
+  {q:"Which state of matter is most compressible?",
+   opts:["Solid","Liquid","Gas","All equally"], ans:2},
+  {q:"Diffusion is fastest in which state of matter?",
+   opts:["Solid","Liquid","Gas","Same in all"], ans:2},
+  {q:"The SI unit of temperature used in science is:",
+   opts:["Celsius","Fahrenheit","Kelvin","Rankine"], ans:2},
+
+  // Phase Changes – Class 7
+  {q:"The melting point of ice (pure water) at standard pressure is:",
+   opts:["100°C","0°C","-273°C","37°C"], ans:1},
+  {q:"The boiling point of water at standard pressure (1 atm) is:",
+   opts:["0°C","37°C","100°C","212°F is the same as …100°C"], ans:2},
+  {q:"The process of a gas changing to a liquid is called:",
+   opts:["Evaporation","Sublimation","Condensation","Melting"], ans:2},
+  {q:"The process of a liquid changing to a gas is called:",
+   opts:["Freezing","Melting","Sublimation","Evaporation"], ans:3},
+  {q:"The process of a liquid changing to a solid is called:",
+   opts:["Condensation","Freezing","Sublimation","Evaporation"], ans:1},
+  {q:"Which of the following undergoes sublimation?",
+   opts:["Water","Iron","Dry Ice (solid CO₂)","Salt"], ans:2},
+  {q:"Naphthalene (camphor) tablets disappear over time because of:",
+   opts:["Melting","Evaporation","Sublimation","Condensation"], ans:2},
+  {q:"When steam from cooking hits a cold lid, it becomes water droplets. This is:",
+   opts:["Evaporation","Sublimation","Melting","Condensation"], ans:3},
+
+  // Latent Heat – Class 8
+  {q:"Latent Heat is the heat energy absorbed or released during a phase change WITHOUT changing:",
+   opts:["Mass","Volume","Temperature","Colour"], ans:2},
+  {q:"Latent Heat of Fusion is associated with the change from:",
+   opts:["Gas to Liquid","Liquid to Gas","Solid to Liquid","Liquid to Solid"], ans:2},
+  {q:"Latent Heat of Vaporization is associated with the change from:",
+   opts:["Solid to Liquid","Liquid to Gas","Gas to Liquid","Solid to Gas"], ans:1},
+  {q:"On a temperature vs time graph, during a phase change, the graph shows:",
+   opts:["A steep rise","A steep fall","A horizontal plateau","A curve"], ans:2},
+  {q:"Why does sweating cool the body?",
+   opts:["Sweat is cold","Evaporation absorbs latent heat from the skin","Sweat has low temperature","Water repels heat"], ans:1},
+  {q:"Which requires MORE latent heat per kg — melting ice or vaporising water?",
+   opts:["Melting ice","Vaporising water (much higher)","Both are equal","Depends on pressure"], ans:1},
+  {q:"The latent heat of fusion of ice is approximately:",
+   opts:["2260 kJ/kg","336 kJ/kg","100 kJ/kg","4200 kJ/kg"], ans:1},
+  {q:"The latent heat of vaporization of water is approximately:",
+   opts:["336 kJ/kg","100 kJ/kg","2260 kJ/kg","500 kJ/kg"], ans:2},
+
+  // Advanced / Applied – Class 8
+  {q:"Why is steam at 100°C more dangerous than boiling water at 100°C?",
+   opts:["Steam is heavier","Steam contains extra latent heat energy","Steam is faster","Water is cooler"], ans:1},
+  {q:"Dry ice is the solid form of which gas?",
+   opts:["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"], ans:2},
+  {q:"At very HIGH pressure, the boiling point of water:",
+   opts:["Remains 100°C","Decreases","Increases","Becomes 0°C"], ans:2},
+  {q:"Which of the following is NOT a characteristic of gases?",
+   opts:["No fixed shape","High compressibility","High density","Fill any container"], ans:2},
+  {q:"When water vapour in clouds cools down to form rain, this is an example of:",
+   opts:["Evaporation","Sublimation","Condensation","Melting"], ans:2},
+  {q:"The specific heat capacity of water is high. This means water:",
+   opts:["Heats up very quickly","Can store a lot of heat energy per kg","Has low latent heat","Evaporates easily"], ans:1},
+];
+
+let quizIndex=0, quizScore=0, quizLocked=false;
+let shuffledQuestions=[];
+
+function startQuiz(){
+  quizIndex=0; quizScore=0; quizLocked=false;
+  // Shuffle questions
+  shuffledQuestions=[...ALL_QUESTIONS].sort(()=>Math.random()-0.5).slice(0,40);
+  document.getElementById('kbc-score').textContent='0';
+  renderQuestion();
+}
+
+function stopQuiz(){}
+
+function resetQuiz(){ quizIndex=0; quizScore=0; }
+
+function renderQuestion(){
+  if(quizIndex>=40){ finishQuiz(); return; }
+  const q=shuffledQuestions[quizIndex];
+  quizLocked=false;
+
+  document.getElementById('kbc-q-label').textContent='Q '+(quizIndex+1);
+  document.getElementById('kbc-qnum').textContent=quizIndex+1;
+  document.getElementById('kbc-question').textContent=q.q;
+  document.getElementById('kbc-prog').style.width=((quizIndex/40)*100)+'%';
+
+  const opts=document.getElementById('kbc-options');
+  opts.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='kbc-option';
+    btn.innerHTML=`<span class="opt-letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick=()=>selectAnswer(i,q.ans,btn);
+    opts.appendChild(btn);
+  });
+}
+
+function selectAnswer(chosen, correct, btn){
+  if(quizLocked) return;
+  quizLocked=true;
+  const opts=document.querySelectorAll('.kbc-option');
+  opts.forEach(b=>b.classList.add('locked'));
+
+  if(chosen===correct){
+    btn.classList.add('correct');
+    quizScore++;
+    document.getElementById('kbc-score').textContent=quizScore;
+    playCorrectSound();
+  } else {
+    btn.classList.add('wrong');
+    opts[correct].classList.add('correct');
+    playWrongSound();
+  }
+
+  setTimeout(()=>{ quizIndex++; renderQuestion(); }, 2000);
+}
+
+function finishQuiz(){
+  // Build result screen
+  const pct=(quizScore/40)*100;
+  let trophy='🏆', stars='⭐⭐⭐⭐⭐', msg='';
+  if(pct>=90){ trophy='🥇'; stars='⭐⭐⭐⭐⭐'; msg='Outstanding! You are a States of Matter Champion! 🎉'; }
+  else if(pct>=75){ trophy='🥈'; stars='⭐⭐⭐⭐'; msg='Great job! A strong performance, keep it up!'; }
+  else if(pct>=50){ trophy='🥉'; stars='⭐⭐⭐'; msg='Good effort! Review the topics and try again!'; }
+  else { trophy='📚'; stars='⭐⭐'; msg='Keep studying! Every expert was once a beginner.'; }
+
+  document.getElementById('result-trophy').textContent=trophy;
+  document.getElementById('result-name').textContent='Congratulations, '+student.name+'!';
+  document.getElementById('result-class').textContent=student.cls+' · '+student.email;
+  document.getElementById('result-stars').textContent=stars;
+  document.getElementById('result-score').textContent=quizScore+'/40';
+  document.getElementById('result-msg').textContent=msg;
+  document.getElementById('kbc-prog').style.width='100%';
+  showResult();
+}
+
+function shareScore(){
+  const text=`🏆 I scored ${quizScore}/40 in the States of Matter Quiz at Biplab Bothra Institute!\n\n🧪 Topic: States of Matter (ICSE Class 6-8)\n👤 Student: ${student.name} | ${student.cls}\n\nPlay at: Biplab Bothra Institute Interactive Science Lab`;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      alert('✅ Score copied to clipboard!\n\nNow open WhatsApp and paste it to share with your teacher.');
+    }).catch(()=>fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  alert('✅ Score copied! Paste it in WhatsApp to share.');
+}
+
+/* =============================================
+   SPARKLES for result screen
+============================================= */
+function buildSparkles(){
+  const c=document.getElementById('sparkles-container');
+  c.innerHTML='';
+  for(let i=0;i<40;i++){
+    const s=document.createElement('div');
+    s.className='sparkle';
+    s.style.left=Math.random()*100+'%';
+    s.style.width=s.style.height=(3+Math.random()*6)+'px';
+    s.style.animationDuration=(3+Math.random()*5)+'s';
+    s.style.animationDelay=(Math.random()*4)+'s';
+    s.style.background=['#FFD700','#00E5FF','#FF8C00','#FF69B4','#00FF88'][Math.floor(Math.random()*5)];
+    c.appendChild(s);
+  }
+}
+
+/* =============================================
+   RESIZE HANDLER
+============================================= */
+window.addEventListener('resize', ()=>{
+  if(currentActivity===0){ const c=document.getElementById('heatCanvas'); if(c){ c.width=c.offsetWidth; buildHeatParticles(c); }}
+  if(currentActivity===1){ const c=document.getElementById('coolCanvas'); if(c){ c.width=c.offsetWidth; }}
+  if(currentActivity===2){ const c=document.getElementById('phaseCanvas'); if(c){ c.width=c.offsetWidth; buildPhaseParticles(c); }}
+  if(currentActivity===3){ initGraphCanvas(); const c=document.getElementById('subCanvas'); if(c) c.width=c.offsetWidth; }
+});
+</script>
+</body>
+</html>
